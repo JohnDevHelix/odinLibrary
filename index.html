@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Odin Project - Library</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <div class="main container">
+      <div class="title">
+        <h1>My Library</h1>
+      </div>
+
+      <div class="new-button">
+        <button id="open">New Book</button>
+      </div>
+
+      <dialog>
+      <div class="new-book">
+        <form action="example.com/path" method="post" id="book-form">
+          <div class="new-title">
+            <label for="new-title"><h3>Title</h3></label>
+            <input type="text" id="new-title" name="new-title" required>
+          </div>
+          <div class="new-author">
+            <label for ="new-author"><h3>Author</h3></label>
+            <input type="text" id="new-author" name="new-author" required>
+          </div>
+          <div class="new-pages">
+            <label for="new-pages"><h3>Pages</h3></label>
+            <input type="number" id="new-pages" name="new-pages" required>
+          </div>
+          <div class="new-status">
+            <h3>Status</h3>
+            <input type="radio" id="not-read" name="status" value="not read yet">
+            <label for="not-read">not read yet</label>
+            <input type="radio" id="read" name="status" value="already read">
+            <label for="read">already read</label>
+          </div>
+          <div class="submit">
+            <button type="submit" id="submit">Submit</button>
+          </div>
+        </form>
+        <div class="close-dialog">
+        <button id="close">Close</button>
+        </div>
+      </div>
+      </dialog>
+        
+      <div class="table-container">
+        <table id="tableInfo">
+          <tr class="headings">
+            <th id="book-heading">No Book Entry</th>
+          </tr>
+        </table>
+    </div>
+
+  <script src="javascript.js"></script>
+  </body>
+</html>

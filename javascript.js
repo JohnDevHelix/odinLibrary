@@ -38,7 +38,7 @@ function addBookToLibrary(title, author, pages, read) {
         tableRow.appendChild(removeTable);
         removeTable.appendChild(removeButton);
 
-        if (read = yesRead.value) {
+        if (read === yesRead.value) {
             readButton.disabled = true;
         }
     

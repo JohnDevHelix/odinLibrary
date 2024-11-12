@@ -1,5 +1,19 @@
 const myLibrary = [];
 
+const submit = document.querySelector("#book-form");
+const newTitle = document.querySelector("#new-title");
+const newAuthor = document.querySelector("#new-author");
+const newPage = document.querySelector("#new-pages");
+const notRead = document.querySelector("#not-read");
+const yesRead = document.querySelector("#read");
+const notReadCheck = document.querySelector("input[name='status']");
+const tableData = document.querySelector("td");
+const statusHeading = document.createElement("th");
+const tBody = document.querySelector("#tbody");
+const removeHeading = document.createElement("th");
+const headings = document.querySelector(".headings");
+const heading = document.querySelector("#book-heading");
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -24,7 +38,7 @@ function addBookToLibrary(title, author, pages, read) {
   const readButton = document.createElement("button");
   readButton.classList.add("read-button");
   readButton.textContent = "Done";
-  const tBody = document.querySelector("#tbody");
+  
 
   removeButton.addEventListener("click", () => {
     const iData = parseInt(
@@ -41,11 +55,16 @@ function addBookToLibrary(title, author, pages, read) {
         myLibrary.indexOf(row.firstChild.firstChild.textContent)
       );
     });
+
+    if (tBody.childElementCount === 0) {
+        heading.innerHTML = "No Book Entry";
+    }
+
   });
 
   const book = new Book(title, author, pages, read);
   myLibrary.push(book.info());
-
+ 
   tBody.appendChild(tableRow);
   tableRow.setAttribute("data-i", myLibrary.indexOf(book.info()));
 
@@ -74,29 +93,14 @@ closeDialog.addEventListener("click", () => {
   dialog.close();
 });
 
-const submit = document.querySelector("#book-form");
 
-const newTitle = document.querySelector("#new-title");
-const newAuthor = document.querySelector("#new-author");
-const newPage = document.querySelector("#new-pages");
-const notRead = document.querySelector("#not-read");
-const yesRead = document.querySelector("#read");
-const notReadCheck = document.querySelector("input[name='status']");
-const tableData = document.querySelector("td");
-const statusHeading = document.createElement("th");
-
-const removeHeading = document.createElement("th");
-const headings = document.querySelector(".headings");
-const heading = document.querySelector("#book-heading");
 
 submit.addEventListener("submit", submitClick, false);
 
 function submitClick(event) {
   event.preventDefault();
 
-  if (statusHeading.textContent === "") {
-    heading.textContent = "Book Info";
-  }
+  heading.innerHTML = "Book Info";
 
   if (notReadCheck.checked === true) {
     addBookToLibrary(

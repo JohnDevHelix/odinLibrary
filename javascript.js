@@ -38,7 +38,6 @@ function addBookToLibrary(title, author, pages, read) {
   const readButton = document.createElement("button");
   readButton.classList.add("read-button");
   readButton.textContent = "Done";
-  
 
   removeButton.addEventListener("click", () => {
     const iData = parseInt(
@@ -57,14 +56,17 @@ function addBookToLibrary(title, author, pages, read) {
     });
 
     if (tBody.childElementCount === 0) {
-        heading.innerHTML = "No Book Entry";
+      heading.innerHTML = "No Book Entry";
     }
-
   });
+
+  readButton.addEventListener("click", () => {
+    
+  })
 
   const book = new Book(title, author, pages, read);
   myLibrary.push(book.info());
- 
+
   tBody.appendChild(tableRow);
   tableRow.setAttribute("data-i", myLibrary.indexOf(book.info()));
 
@@ -92,8 +94,6 @@ openDialog.addEventListener("click", () => {
 closeDialog.addEventListener("click", () => {
   dialog.close();
 });
-
-
 
 submit.addEventListener("submit", submitClick, false);
 

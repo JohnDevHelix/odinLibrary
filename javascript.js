@@ -49,10 +49,11 @@ function addBookToLibrary(title, author, pages, read) {
     removeButton.parentNode.parentNode.parentNode.remove();
     myLibrary.splice(iData, 1);
     document.querySelectorAll(".row-data").forEach((row) => {
-      row.setAttribute(
-        "data-i",
-        myLibrary.indexOf(row.firstChild.firstChild.textContent)
-      );
+      for (let i = 0; i < myLibrary.length; i++) {
+        if (row.firstChild.firstChild.textContent === myLibrary[i].info()) {
+          row.setAttribute("data-i", [i]);
+        }
+      }
     });
 
     if (tBody.childElementCount === 0) {

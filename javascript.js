@@ -60,18 +60,16 @@ function addBookToLibrary(title, author, pages, read) {
     }
   });
 
-  readButton.addEventListener("click", () => {
-    
-  })
+  readButton.addEventListener("click", () => {});
 
   const book = new Book(title, author, pages, read);
-  myLibrary.push(book.info());
+  myLibrary.push(book);
 
   tBody.appendChild(tableRow);
-  tableRow.setAttribute("data-i", myLibrary.indexOf(book.info()));
+  tableRow.setAttribute("data-i", myLibrary.indexOf(book));
 
   for (let i = 0; i < myLibrary.length; i++) {
-    dataInfo.textContent = myLibrary[i];
+    dataInfo.textContent = myLibrary[i].info();
     tableRow.appendChild(dataInfo);
     dataInfo.appendChild(readTable);
     readTable.appendChild(readButton);

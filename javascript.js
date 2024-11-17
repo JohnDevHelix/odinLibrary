@@ -43,8 +43,6 @@ function addBookToLibrary(title, author, pages, read) {
     const iData = parseInt(
       removeButton.parentNode.parentNode.parentNode.dataset.i
     );
-    const buttonTable =
-      removeButton.parentNode.parentNode.parentNode.parentNode;
     console.log(iData);
     removeButton.parentNode.parentNode.parentNode.remove();
     myLibrary.splice(iData, 1);
@@ -61,7 +59,25 @@ function addBookToLibrary(title, author, pages, read) {
     }
   });
 
-  readButton.addEventListener("click", () => {});
+  readButton.addEventListener("click", () => {
+    const readText = readButton.parentNode.parentNode.firstChild.textContent;
+    document.querySelectorAll(".row-data").forEach((row) => {
+      for (let i = 0; i < myLibrary.length; i++) {
+        if (row.firstChild.firstChild.textContent === myLibrary[i].info()) {
+          myLibrary[i].read = "completed";
+          const completed = new Book(
+            myLibrary[i].title,
+            myLibrary[i].author,
+            myLibrary[i].pages,
+            myLibrary[i].read
+          );
+          myLibrary[i] = completed;
+          row.firstChild.firstChild.textContent = myLibrary[i].info();
+          readButton.disabled = "true";
+        }
+      }
+    });
+  });
 
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);

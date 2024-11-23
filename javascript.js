@@ -39,11 +39,25 @@ function addBookToLibrary(title, author, pages, read) {
   readButton.classList.add("read-button");
   readButton.textContent = "Done";
 
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
+
+  tBody.appendChild(tableRow);
+  tableRow.setAttribute("data-i", myLibrary.indexOf(book));
+
+  for (let i = 0; i < myLibrary.length; i++) {
+    dataInfo.textContent = myLibrary[i].info();
+    tableRow.appendChild(dataInfo);
+    dataInfo.appendChild(readTable);
+    readTable.appendChild(readButton);
+    dataInfo.appendChild(removeTable);
+    removeTable.appendChild(removeButton);
+  }
+
   removeButton.addEventListener("click", () => {
     const iData = parseInt(
       removeButton.parentNode.parentNode.parentNode.dataset.i
     );
-    console.log(iData);
     removeButton.parentNode.parentNode.parentNode.remove();
     myLibrary.splice(iData, 1);
     document.querySelectorAll(".row-data").forEach((row) => {
@@ -79,21 +93,6 @@ function addBookToLibrary(title, author, pages, read) {
     });
   });
 
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-
-  tBody.appendChild(tableRow);
-  tableRow.setAttribute("data-i", myLibrary.indexOf(book));
-
-  for (let i = 0; i < myLibrary.length; i++) {
-    dataInfo.textContent = myLibrary[i].info();
-    tableRow.appendChild(dataInfo);
-    dataInfo.appendChild(readTable);
-    readTable.appendChild(readButton);
-    dataInfo.appendChild(removeTable);
-    removeTable.appendChild(removeButton);
-  }
-
   if (read === yesRead.value) {
     readButton.disabled = "true";
   }
@@ -117,19 +116,38 @@ function submitClick(event) {
 
   heading.innerHTML = "Book Info";
 
-  if (notReadCheck.checked === true) {
-    addBookToLibrary(
-      newTitle.value,
-      newAuthor.value,
-      newPage.value,
-      notRead.value
-    );
-  } else {
-    addBookToLibrary(
-      newTitle.value,
-      newAuthor.value,
-      newPage.value,
-      yesRead.value
-    );
+  let result = false;
+
+  if (myLibrary.length >= 1) {
+    for (i = 0; i < myLibrary.length; i++) {
+      if (
+        newTitle.value === myLibrary[i].title &&
+        newAuthor.value === myLibrary[i].author &&
+        newPage.value === myLibrary[i].pages
+      ) {
+        result = true;
+        alert("Book already exist");
+      }
+    }
   }
+
+  if (result === false) {
+    if (notReadCheck.checked === true) {
+      addBookToLibrary(
+        newTitle.value,
+        newAuthor.value,
+        newPage.value,
+        notRead.value
+      );
+    } else {
+      addBookToLibrary(
+        newTitle.value,
+        newAuthor.value,
+        newPage.value,
+        yesRead.value
+      );
+    }
+  }
+
+  document.querySelector("form").reset();
 }

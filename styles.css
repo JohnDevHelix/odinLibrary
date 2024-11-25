@@ -1,3 +1,9 @@
+body {
+  font-family: "Parkinsans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 table,
 td,
 th {
@@ -24,3 +30,44 @@ th {
 .table-container {
   padding: 20px 0 20px 0;
 }
+
+input[type=text],
+input[type=number] {
+  width: 250px;
+  padding: 3px;
+}
+
+input[type=radio] {
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.submit, .close-dialog {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0 15px 0;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: black 2px solid;
+}
+
+button:hover {
+    background-color: grey;
+}
+
+button:active {
+    background-color: azure;
+}
+
+dialog[open] {
+    animation: open 1s forwards;
+}
+
+@keyframes open {
+    from { opacity: 0 }
+    to   { opacity: 1 }
+  }

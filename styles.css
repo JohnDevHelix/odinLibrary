@@ -1,4 +1,26 @@
-table, td, th {
-    border: 2px black solid;
-    }
-  
+table,
+td,
+th {
+  border: 2px black solid;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  display: flex;
+  width: 70rem;
+  border: black solid 1px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-button {
+  padding: 10px 0 10px 0;
+}
+
+.table-container {
+  padding: 20px 0 20px 0;
+}

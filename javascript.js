@@ -6,7 +6,7 @@ const newAuthor = document.querySelector("#new-author");
 const newPage = document.querySelector("#new-pages");
 const notRead = document.querySelector("#not-read");
 const yesRead = document.querySelector("#read");
-const notReadCheck = document.querySelector("input[name='status']");
+const inProgress = document.querySelector("#in-progress");
 const tableData = document.querySelector("td");
 const statusHeading = document.createElement("th");
 const tBody = document.querySelector("#tbody");
@@ -27,14 +27,14 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
   const tableRow = document.createElement("tr");
   tableRow.classList.add("row-data");
-  const dataInfo = document.createElement("td");
+  const dataInfo = document.createElement("div");
   dataInfo.classList.add("data");
   const table = document.querySelector("table");
-  const removeTable = document.createElement("td");
+  const removeTable = document.createElement("div");
   const removeButton = document.createElement("button");
   removeButton.textContent = "Remove";
   removeButton.classList.add("remove-button");
-  const readTable = document.createElement("td");
+  const readTable = document.createElement("div");
   const readButton = document.createElement("button");
   readButton.classList.add("read-button");
   readButton.textContent = "Done";
@@ -121,8 +121,8 @@ function submitClick(event) {
   if (myLibrary.length >= 1) {
     for (i = 0; i < myLibrary.length; i++) {
       if (
-        newTitle.value === myLibrary[i].title &&
-        newAuthor.value === myLibrary[i].author &&
+        newTitle.value.toLowerCase() === myLibrary[i].title.toLowerCase() &&
+        newAuthor.value.toLowerCase() === myLibrary[i].author.toLowerCase() &&
         newPage.value === myLibrary[i].pages
       ) {
         result = true;
@@ -132,19 +132,26 @@ function submitClick(event) {
   }
 
   if (result === false) {
-    if (notReadCheck.checked === true) {
+    if (yesRead.checked === true) {
       addBookToLibrary(
         newTitle.value,
         newAuthor.value,
         newPage.value,
-        notRead.value
+        yesRead.value
+      );
+    } else if (inProgress.checked === true) {
+      addBookToLibrary(
+        newTitle.value,
+        newAuthor.value,
+        newPage.value,
+        inProgress.value
       );
     } else {
       addBookToLibrary(
         newTitle.value,
         newAuthor.value,
         newPage.value,
-        yesRead.value
+        notRead.value
       );
     }
   }

@@ -33,7 +33,7 @@ th {
 
 input[type="text"],
 input[type="number"] {
-  width: 250px;
+  width: 400px;
   padding: 3px;
 }
 
@@ -50,10 +50,11 @@ input[type="radio"] {
 }
 
 button {
-  width: 100px;
+  width: 150px;
   height: 30px;
   border-radius: 5px;
   border: black 2px solid;
+  font-weight: bold;
 }
 
 button:hover {
@@ -74,7 +75,8 @@ dialog[open] {
 }
 
 #for-new,
-#for-completed {
+#for-completed,
+#for-in-progress {
   margin-right: 20px;
   font-weight: bold;
 }
@@ -84,15 +86,27 @@ dialog[open] {
   justify-content: center;
   align-items: center;
   border: black 1px solid;
+  background-size: 175px 240px;
+  background-repeat: no-repeat;
+  border-radius: 3px;
 }
 
 .main-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   border: black 1px solid;
   height: 15rem;
   width: 60rem;
   gap: 20px;
+}
+
+.table-container {
+  width: 80%;
+  border: 2px black solid;
+}
+
+table {
+  width: 100%;
 }
 
 @keyframes open {

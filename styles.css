@@ -111,27 +111,48 @@ table {
 
 .trMainDiv {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   border: black 1px solid;
-  gap: 10px;
-  ;
 }
 
-.data, .remove-button, .read-button, .cover {
+.data,
+.remove-button,
+.read-button,
+.cover {
   border: black 1px solid;
 }
 
 .cover {
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
+  grid-column: 2 / 4;
+  grid-row: 1 / 6;
 }
 
 .data {
-  grid-column: 3 / 5;
+  grid-column: 3 / 8;
+  grid-row: 2 / 3;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
-.tData, .trMainDiv {
+.read-button,
+.remove-button {
+  width: 100px;
+}
+
+.readDiv {
+  grid-column: 5 / 6;
+  grid-row: 4 / 5;
+}
+
+.removeDiv {
+  grid-column: 7 / 8;
+  grid-row: 4 / 5;
+}
+
+.tData,
+.trMainDiv {
   height: 200px;
 }
 

@@ -25,19 +25,32 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(title, author, pages, read) {
+  const table = document.querySelector("table");
+
   const tableRow = document.createElement("tr");
   tableRow.classList.add("row-data");
+
+  const tData = document.createElement("td");
+  tData.classList.add("tData");
+
+  const mainDiv = document.createElement("div");
+  mainDiv.classList.add("trMainDiv")
+
   const dataInfo = document.createElement("div");
   dataInfo.classList.add("data");
-  const table = document.querySelector("table");
-  const removeTable = document.createElement("div");
+
+  const removeDiv = document.createElement("div");
   const removeButton = document.createElement("button");
   removeButton.textContent = "Remove";
   removeButton.classList.add("remove-button");
-  const readTable = document.createElement("div");
+
+  const readDiv = document.createElement("div");
   const readButton = document.createElement("button");
   readButton.classList.add("read-button");
   readButton.textContent = "Done";
+
+  const coverDiv = document.createElement("div");
+  coverDiv.classList.add("cover");
 
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
@@ -47,11 +60,11 @@ function addBookToLibrary(title, author, pages, read) {
 
   for (let i = 0; i < myLibrary.length; i++) {
     dataInfo.textContent = myLibrary[i].info();
-    tableRow.appendChild(dataInfo);
-    dataInfo.appendChild(readTable);
-    readTable.appendChild(readButton);
-    dataInfo.appendChild(removeTable);
-    removeTable.appendChild(removeButton);
+    tableRow.appendChild(tData);
+    tData.appendChild(mainDiv);
+    mainDiv.append(coverDiv, dataInfo, readDiv, removeDiv);
+    readDiv.appendChild(readButton);
+    removeDiv.appendChild(removeButton);
   }
 
   removeButton.addEventListener("click", () => {

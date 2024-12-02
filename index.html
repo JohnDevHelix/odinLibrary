@@ -44,9 +44,11 @@
             <div class="new-status">
               <h3>Status:</h3>
               <div class="radios">
-                <input type="radio" id="not-read" name="status" value="not read yet">
+                <input type="radio" id="not-read" name="status" value="new">
                 <label for="not-read" id="for-new">New</label>
-                <input type="radio" id="read" name="status" value="already read">
+                <input type="radio" id="in-progress" name="status" value="in progress">
+                <label for="in-progress" id="for-in-progress">In Progress</label>
+                <input type="radio" id="read" name="status" value="completed">
                 <label for="read" id="for-completed">Completed</label>
               </div>
             </div>
@@ -72,17 +74,10 @@
         </table>
       </div>
 
-      <div class="main-grid">
-        <div class="grid grid-one"></div>
-        <div class="grid grid-two"></div>
-        <div class="grid grid-three">
-          <div class="new-button">
-            <button id="open">New Book</button>
-          </div>
-        </div>
-        <div class="grid grid-four"></div>
-        <div class="grid grid-five"></div>
+      <div class="new-button">
+        <button id="open">New Book</button>
       </div>
+
     </div>
   </div>
 

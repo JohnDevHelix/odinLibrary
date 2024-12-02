@@ -40,11 +40,13 @@ function addBookToLibrary(title, author, pages, read) {
   dataInfo.classList.add("data");
 
   const removeDiv = document.createElement("div");
+  removeDiv.classList.add("removeDiv");
   const removeButton = document.createElement("button");
   removeButton.textContent = "Remove";
   removeButton.classList.add("remove-button");
 
   const readDiv = document.createElement("div");
+  readDiv.classList.add("readDiv");
   const readButton = document.createElement("button");
   readButton.classList.add("read-button");
   readButton.textContent = "Done";
@@ -81,7 +83,7 @@ function addBookToLibrary(title, author, pages, read) {
       }
     });
 
-    if (tBody.childElementCount === 0) {
+    if (tBody.childElementCount === 1) {
       heading.innerHTML = "No Book Entry";
     }
   });

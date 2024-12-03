@@ -93,22 +93,20 @@ function addBookToLibrary(title, author, pages, read) {
   });
 
   readButton.addEventListener("click", () => {
-    const readText = readButton.parentNode.parentNode.firstChild.textContent;
+    const readText = readButton.parentNode.parentNode.parentNode.parentNode.dataset.i
     document.querySelectorAll(".row-data").forEach((row) => {
-      for (let i = 0; i < myLibrary.length; i++) {
-        if (row.firstChild.firstChild.textContent === myLibrary[i].info()) {
-          myLibrary[i].read = "completed";
+        if (row.firstChild.firstChild.firstChild.nextSibling.textContent === myLibrary[readText].info()) {
+          myLibrary[readText].read = "Completed";
           const completed = new Book(
-            myLibrary[i].title,
-            myLibrary[i].author,
-            myLibrary[i].pages,
-            myLibrary[i].read
+            myLibrary[readText].title,
+            myLibrary[readText].author,
+            myLibrary[readText].pages,
+            myLibrary[readText].read
           );
-          myLibrary[i] = completed;
-          row.firstChild.firstChild.textContent = myLibrary[i].info();
+          myLibrary[readText] = completed;
+          row.firstChild.firstChild.firstChild.nextSibling.textContent = myLibrary[readText].info();
           readButton.disabled = "true";
         }
-      }
     });
   });
 

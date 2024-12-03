@@ -54,6 +54,9 @@ function addBookToLibrary(title, author, pages, read) {
   const coverDiv = document.createElement("div");
   coverDiv.classList.add("cover");
 
+  const img = document.createElement("img");
+  img.src = "images/bg" + Math.floor((Math.random() * 9 ) + 1) + ".jpeg";
+
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 
@@ -67,13 +70,14 @@ function addBookToLibrary(title, author, pages, read) {
     mainDiv.append(coverDiv, dataInfo, readDiv, removeDiv);
     readDiv.appendChild(readButton);
     removeDiv.appendChild(removeButton);
+    coverDiv.appendChild(img);
   }
 
   removeButton.addEventListener("click", () => {
     const iData = parseInt(
-      removeButton.parentNode.parentNode.parentNode.dataset.i
+      removeButton.parentNode.parentNode.parentNode.parentNode.dataset.i
     );
-    removeButton.parentNode.parentNode.parentNode.remove();
+    removeButton.parentNode.parentNode.parentNode.parentNode.remove();
     myLibrary.splice(iData, 1);
     document.querySelectorAll(".row-data").forEach((row) => {
       for (let i = 0; i < myLibrary.length; i++) {
@@ -83,7 +87,7 @@ function addBookToLibrary(title, author, pages, read) {
       }
     });
 
-    if (tBody.childElementCount === 1) {
+    if (tBody.childElementCount === 0) {
       heading.innerHTML = "No Book Entry";
     }
   });

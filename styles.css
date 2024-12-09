@@ -285,3 +285,15 @@ tr {
     transform: scale(1);
   }
 }
+
+@media screen and (max-width: 768px) {
+
+  .main {
+    width: 90%;
+  }
+
+  .cover {
+    grid-column: 1 / 5;
+    grid-row: 1 / 9;
+  }
+}

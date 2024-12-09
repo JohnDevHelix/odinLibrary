@@ -75,10 +75,13 @@ function addBookToLibrary(title, author, pages, read) {
   tBody.appendChild(tableRow);
   tableRow.setAttribute("data-i", myLibrary.indexOf(book));
 
+  if (read != "Completed") {
+    readDiv.appendChild(readButton);
+  }
+
   tableRow.appendChild(tData);
   tData.appendChild(mainDiv);
   mainDiv.append(coverDiv, dataInfo, readDiv, removeDiv);
-  readDiv.appendChild(readButton);
   removeDiv.appendChild(removeButton);
   coverDiv.appendChild(img);
   dataInfo.textContent = book.info();
@@ -120,6 +123,7 @@ function addBookToLibrary(title, author, pages, read) {
         myLibrary[readText] = completed;
         row.firstChild.firstChild.firstChild.nextSibling.textContent =
           myLibrary[readText].info();
+          readButton.remove();
       }
     });
   });

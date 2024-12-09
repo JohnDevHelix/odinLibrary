@@ -34,7 +34,7 @@ function addBookToLibrary(title, author, pages, read) {
   tData.classList.add("tData");
 
   const mainDiv = document.createElement("div");
-  mainDiv.classList.add("trMainDiv")
+  mainDiv.classList.add("trMainDiv");
 
   const dataInfo = document.createElement("div");
   dataInfo.classList.add("data");
@@ -49,13 +49,25 @@ function addBookToLibrary(title, author, pages, read) {
   readDiv.classList.add("readDiv");
   const readButton = document.createElement("button");
   readButton.classList.add("read-button");
-  readButton.textContent = "Done";
+  readButton.textContent = "Completed";
 
   const coverDiv = document.createElement("div");
   coverDiv.classList.add("cover");
 
   const img = document.createElement("img");
-  img.src = "images/bg" + Math.floor((Math.random() * 9 ) + 1) + ".jpeg";
+  img.src = "images/bg" + Math.floor(Math.random() * 9 + 1) + ".jpeg";
+
+  const existingBook = myLibrary.find(
+    (book) =>
+      book.title.toLowerCase() === title.toLowerCase() &&
+      book.author.toLowerCase() === author.toLowerCase() &&
+      book.pages === pages
+  );
+
+  if (existingBook) {
+    alert("Book already exists");
+    return;
+  }
 
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
@@ -63,22 +75,20 @@ function addBookToLibrary(title, author, pages, read) {
   tBody.appendChild(tableRow);
   tableRow.setAttribute("data-i", myLibrary.indexOf(book));
 
-  for (let i = 0; i < myLibrary.length; i++) {
-    dataInfo.textContent = myLibrary[i].info();
-    tableRow.appendChild(tData);
-    tData.appendChild(mainDiv);
-    mainDiv.append(coverDiv, dataInfo, readDiv, removeDiv);
-    readDiv.appendChild(readButton);
-    removeDiv.appendChild(removeButton);
-    coverDiv.appendChild(img);
-  }
+  tableRow.appendChild(tData);
+  tData.appendChild(mainDiv);
+  mainDiv.append(coverDiv, dataInfo, readDiv, removeDiv);
+  readDiv.appendChild(readButton);
+  removeDiv.appendChild(removeButton);
+  coverDiv.appendChild(img);
+  dataInfo.textContent = book.info();
 
   removeButton.addEventListener("click", () => {
     const iData = parseInt(
       removeButton.parentNode.parentNode.parentNode.parentNode.dataset.i
     );
-    removeButton.parentNode.parentNode.parentNode.parentNode.remove();
     myLibrary.splice(iData, 1);
+    removeButton.parentNode.parentNode.parentNode.parentNode.remove();
     document.querySelectorAll(".row-data").forEach((row) => {
       for (let i = 0; i < myLibrary.length; i++) {
         if (row.firstChild.firstChild.textContent === myLibrary[i].info()) {
@@ -93,20 +103,24 @@ function addBookToLibrary(title, author, pages, read) {
   });
 
   readButton.addEventListener("click", () => {
-    const readText = readButton.parentNode.parentNode.parentNode.parentNode.dataset.i
+    const readText =
+      readButton.parentNode.parentNode.parentNode.parentNode.dataset.i;
     document.querySelectorAll(".row-data").forEach((row) => {
-        if (row.firstChild.firstChild.firstChild.nextSibling.textContent === myLibrary[readText].info()) {
-          myLibrary[readText].read = "Completed";
-          const completed = new Book(
-            myLibrary[readText].title,
-            myLibrary[readText].author,
-            myLibrary[readText].pages,
-            myLibrary[readText].read
-          );
-          myLibrary[readText] = completed;
-          row.firstChild.firstChild.firstChild.nextSibling.textContent = myLibrary[readText].info();
-          readButton.disabled = "true";
-        }
+      if (
+        row.firstChild.firstChild.firstChild.nextSibling.textContent ===
+        myLibrary[readText].info()
+      ) {
+        myLibrary[readText].read = "Completed";
+        const completed = new Book(
+          myLibrary[readText].title,
+          myLibrary[readText].author,
+          myLibrary[readText].pages,
+          myLibrary[readText].read
+        );
+        myLibrary[readText] = completed;
+        row.firstChild.firstChild.firstChild.nextSibling.textContent =
+          myLibrary[readText].info();
+      }
     });
   });
 
@@ -133,45 +147,27 @@ function submitClick(event) {
 
   heading.innerHTML = "Book Info";
 
-  let result = false;
-
-  if (myLibrary.length >= 1) {
-    for (i = 0; i < myLibrary.length; i++) {
-      if (
-        newTitle.value.toLowerCase() === myLibrary[i].title.toLowerCase() &&
-        newAuthor.value.toLowerCase() === myLibrary[i].author.toLowerCase() &&
-        newPage.value === myLibrary[i].pages
-      ) {
-        result = true;
-        alert("Book already exist");
-      }
-    }
+  if (yesRead.checked === true) {
+    addBookToLibrary(
+      newTitle.value,
+      newAuthor.value,
+      newPage.value,
+      yesRead.value
+    );
+  } else if (inProgress.checked === true) {
+    addBookToLibrary(
+      newTitle.value,
+      newAuthor.value,
+      newPage.value,
+      inProgress.value
+    );
+  } else {
+    addBookToLibrary(
+      newTitle.value,
+      newAuthor.value,
+      newPage.value,
+      notRead.value
+    );
   }
-
-  if (result === false) {
-    if (yesRead.checked === true) {
-      addBookToLibrary(
-        newTitle.value,
-        newAuthor.value,
-        newPage.value,
-        yesRead.value
-      );
-    } else if (inProgress.checked === true) {
-      addBookToLibrary(
-        newTitle.value,
-        newAuthor.value,
-        newPage.value,
-        inProgress.value
-      );
-    } else {
-      addBookToLibrary(
-        newTitle.value,
-        newAuthor.value,
-        newPage.value,
-        notRead.value
-      );
-    }
-  }
-
   document.querySelector("form").reset();
 }
